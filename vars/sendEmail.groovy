@@ -26,7 +26,10 @@ def call(String recipients, String body) {
 
     }
     emailext(subject: "Build $status - ${JOB_NAME} #${BUILD_NUMBER} ",
-            body: "<h3>status: $status</h3><p>$body<p>"
+            body: """
+                 <h3>status: $status</h3>
+                 <p>$body<p>
+                 """
             , mimeType: 'text/html'
             , from: '"Jenkins server" <foo@acme.org>'
             , to: "$recipients")
