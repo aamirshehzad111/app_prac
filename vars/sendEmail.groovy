@@ -1,15 +1,5 @@
 #!/usr/bin/env groovy
 
-/**
-* This shared lib depends on emailExt plugin
-* Usage:
-    post { //after build
-        changed { //if status changed then send email
-            sendEmail('dest1@mail.com, dest2@mail.com')
-        }
-    }
- *
- */
 def call(String recipients) {
  def status, logRegex
 
