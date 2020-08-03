@@ -27,8 +27,8 @@ def call(String recipients, String body) {
     }
     emailext(subject: "Build $status - ${JOB_NAME} #${BUILD_NUMBER} ",
             body: """ 
-                 job:  ${env.JOB_NAME} 
-                 brnach: ${env.BRANCH_NAME}
+                 job:  ${env.JOB_NAME} \n
+                 brnach: ${BRANCH_NAME} \n
             """
             , from: '"Jenkins server" <foo@acme.org>'
             , to: "$recipients")
