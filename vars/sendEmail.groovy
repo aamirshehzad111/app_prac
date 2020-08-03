@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call(String recipients, String body) {
+def call(String recipients, String buildUrl, String branch) {
  def status, logRegex
 
     switch (currentBuild.currentResult) {
@@ -26,7 +26,7 @@ def call(String recipients, String body) {
 
     }
     emailext(subject: "Build $status - ${JOB_NAME} #${BUILD_NUMBER} ",
-            body: """ Job:  ${env.JOB_NAME}\n Brnach: ${env.BRANCH_NAME}\n Build Number: ${BUILD_NUMBER}\n"""
+            body: """Job: ${env.JOB_NAME}\n Brnach: ${branch}\n Build Number: ${BUILD_NUMBER}\n Build Url: ${buildUrl}\n"""
             , from: '"Jenkins server" <foo@acme.org>'
             , to: "$recipients")
 
