@@ -26,16 +26,8 @@ def call(String recipients, String buildUrl, String branch) {
 
     }
     emailext(subject: "Build $status - ${JOB_NAME} #${BUILD_NUMBER} ",
-            body: """Job: ${env.JOB_NAME}\n Branch: ${branch}\n Build Number: ${BUILD_NUMBER}\n Build Url: ${buildUrl}\n"""
+            body: """ Job: ${env.JOB_NAME}\n Branch: ${branch}\n Build Number: ${BUILD_NUMBER}\n Build Url: ${buildUrl}\n Status: ${currentBuild.currentResult}"""
             , from: '"Jenkins server" <foo@acme.org>'
             , to: "$recipients")
 
 }
-
-/*
-<p> Build $status on Job:
-            <a style = "font-size:14px;text-decoration:underline;font-weight:bold" href="${BUILD_URL}/console">${
-                JOB_NAME
-            } - build# ${BUILD_NUMBER} </a></p>
-            <p> <pre> \${BUILD_LOG_REGEX, regex = "^.*?$logRegex.*?\$", linesBefore = 25, linesAfter = 150, maxMatches = 10, showTruncatedLines = false, escapeHtml = false} </pre></p>
-            */
