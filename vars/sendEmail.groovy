@@ -1,8 +1,9 @@
 #!/usr/bin/env groovy
+import hudson.model.User
 
 @NonCPS
 def getEMail() {
-  def user = hudson.model.User.current()
+  def user = User.current()
   return  user.getProperty(hudson.tasks.Mailer.UserProperty.class).getAddress()
 }
 
@@ -35,6 +36,6 @@ def call(String buildUrl, String branch) {
     emailext(subject: "Build $status - ${JOB_NAME} #${BUILD_NUMBER} ",
             body: """ Job: ${env.JOB_NAME}\n Branch: ${branch}\n Build Number: ${BUILD_NUMBER}\n Build Url: ${buildUrl}\n Status: ${currentBuild.currentResult}"""
             , from: '"Jenkins server" <foo@acme.org>'
-             , to: "mtariq@nclouds.com")
+             , to: "${emailID}")
 
 }
