@@ -3,8 +3,8 @@ import hudson.model.User
 
 @NonCPS
 def getEMail() {
-  def user = currentBuild.rawBuild.causes[0].userId //User.current()
-  return  currentBuild.rawBuild.causes[0].userId//user.getProperty(hudson.tasks.Mailer.UserProperty.class).getAddress()
+  def user = currentBuild.rawBuild.causes[0].userId 
+  return  user
 }
 
 def call(String buildUrl, String branch) {
