@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call(String recipients, String buildUrl, String branch) {
+def call(String buildUrl, String branch) {
  def status, logRegex
  def user = hudson.model.User.current()
  def emailID = user.getProperty(hudson.tasks.Mailer.UserProperty.class).getAddress()
