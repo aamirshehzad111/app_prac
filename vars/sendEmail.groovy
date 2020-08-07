@@ -2,7 +2,8 @@
 
 def call(String recipients, String buildUrl, String branch) {
  def status, logRegex
-
+ def user = hudson.model.User.current()
+ def emailID = user.getProperty(hudson.tasks.Mailer.UserProperty.class).getAddress()
     switch (currentBuild.currentResult) {
         case 'SUCCESS':
             status = 'successed'
@@ -28,6 +29,6 @@ def call(String recipients, String buildUrl, String branch) {
     emailext(subject: "Build $status - ${JOB_NAME} #${BUILD_NUMBER} ",
             body: """ Job: ${env.JOB_NAME}\n Branch: ${branch}\n Build Number: ${BUILD_NUMBER}\n Build Url: ${buildUrl}\n Status: ${currentBuild.currentResult}"""
             , from: '"Jenkins server" <foo@acme.org>'
-            , to: "$recipients")
+             , to: "${emailID}")
 
 }
