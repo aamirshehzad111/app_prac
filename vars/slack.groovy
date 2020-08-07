@@ -2,7 +2,7 @@
 
 def call() {
   def buildResult = currentBuild.currentResult
-  def currentUser = 'A'
+  def currentUser = hudson.model.User.current()
   def duration = currentBuild.durationString.replace(' and counting', '')
   BUILD_URL="${BUILD_URL}/console"
     if(!env.BUILD_NUMBER.equals("1")){
