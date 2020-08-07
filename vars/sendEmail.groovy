@@ -1,9 +1,15 @@
 #!/usr/bin/env groovy
 
+@NonCPS
+def getEMail() {
+  def user = hudson.model.User.current()
+  return  user.getProperty(hudson.tasks.Mailer.UserProperty.class).getAddress()
+}
+
 def call(String buildUrl, String branch) {
  def status, logRegex
- def user = hudson.model.User.current()
- def emailID = user.getProperty(hudson.tasks.Mailer.UserProperty.class).getAddress()
+ 
+ def emailID = getEMail()
     switch (currentBuild.currentResult) {
         case 'SUCCESS':
             status = 'successed'
