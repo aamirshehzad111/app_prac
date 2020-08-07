@@ -1,8 +1,17 @@
 #!/usr/bin/env groovy
 
-def call(String cu) {
+import hudson.model.*
+
+def getUser(){
+    def job = Jenkins.getInstance().getItemByFullName(env.JOB_BASE_NAME, Job.class)
+    def build = job.getBuildByNumber(env.BUILD_ID as int)
+    def userId = build.getCause(Cause.UserIdCause).getUserId()
+    return userId
+}
+
+def call() {
   def buildResult = currentBuild.currentResult
-  def currentUser = hudson.model.User.current()
+  def currentUser = getUser()
   def duration = currentBuild.durationString.replace(' and counting', '')
   def BUILD_URL="${BUILD_URL}/console"
     if(!env.BUILD_NUMBER.equals("1")){
