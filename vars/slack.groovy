@@ -1,8 +1,8 @@
 #!/usr/bin/env groovy
 
-def call() {
+def call(String cu) {
   def buildResult = currentBuild.currentResult
-  def currentUser = hudson.model.User.current()
+  def currentUser = cu
   def duration = currentBuild.durationString.replace(' and counting', '')
   def BUILD_URL="${BUILD_URL}/console"
     if(!env.BUILD_NUMBER.equals("1")){
@@ -10,7 +10,7 @@ def call() {
           slackSend color: "good", message: "${currentUser} - ${env.JOB_NAME} - #${env.BUILD_NUMBER} Success after ${duration} (<${BUILD_URL}|Open>)"
         }
         else if (buildResult == "FAILURE") {
-            slackSend color: "danger", message: "${currentUser} - ${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure after ${duration} (<${BUILD_URL}|Open>)"
+            slackSend color: "danger", message: "${cu} - ${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure after ${duration} (<${BUILD_URL}|Open>)"
         }
         else if (buildResult == "STABLE") {
             slackSend color: "good", message: "${currentUser} - ${env.JOB_NAME} - #${env.BUILD_NUMBER} Back to normal after ${duration} (<${BUILD_URL}|Open>)"
