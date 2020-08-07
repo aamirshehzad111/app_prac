@@ -19,7 +19,7 @@ def call() {
           slackSend color: "good", message: "${currentUser} - ${env.JOB_NAME} - #${env.BUILD_NUMBER} Success after ${duration} (<${BUILD_URL}|Open>)"
         }
         else if (buildResult == "FAILURE") {
-            slackSend color: "danger", message: "${currentUser} - ${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure after ${duration} (<${BUILD_URL}|Open>)"
+            slackSend color: "danger", message: "Started By: ${currentUser} \n ${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure after ${duration} (<${BUILD_URL}|Open>)"
         }
         else if (buildResult == "STABLE") {
             slackSend color: "good", message: "${currentUser} - ${env.JOB_NAME} - #${env.BUILD_NUMBER} Back to normal after ${duration} (<${BUILD_URL}|Open>)"
