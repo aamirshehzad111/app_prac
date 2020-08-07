@@ -3,7 +3,7 @@
 @NonCPS
 def getEMail() {
   def user = currentBuild.rawBuild.causes[0].userId 
-  return build.causes[0].userId
+  return user
 }
 
 def call(String buildUrl, String branch) {
