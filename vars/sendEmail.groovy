@@ -1,5 +1,4 @@
 #!/usr/bin/env groovy
-import hudson.model.User
 
 @NonCPS
 def getEMail() {
