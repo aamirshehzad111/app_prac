@@ -4,7 +4,7 @@ import hudson.model.*
 
 def getUser(int build_number){
     def job = Jenkins.getInstance().getItemByFullName(env.JOB_BASE_NAME, Job.class)
-    def build =  job.getBuildByNumber(System.getenv("BUILD_NUMBER") as int)
+    def build =  job.getBuildByNumber(env.BUILD_NUMBER as int)
     def userId = build.getCause(Cause.UserIdCause).getUserId()
     return userId
 }
