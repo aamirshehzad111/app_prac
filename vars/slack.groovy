@@ -2,16 +2,16 @@
 
 import hudson.model.*
 
-def getUser(){
+def getUser(int build_number){
     def job = Jenkins.getInstance().getItemByFullName(env.JOB_BASE_NAME, Job.class)
-    def build =  job.getBuildByNumber(env.BUILD_NUMBER as int)
+    def build =  job.getBuildByNumber(build_number)
     def userId = build.getCause(Cause.UserIdCause).getUserId()
     return userId
 }
 
-def call() {
+def call(String build_number) {
   def buildResult = currentBuild.currentResult
-  def currentUser = getUser()
+  def currentUser = getUser(build_number.toInteger())
   def duration = currentBuild.durationString.replace(' and counting', '')
   def BUILD_URL="${BUILD_URL}console"
     if(!env.BUILD_NUMBER.equals("1")){
