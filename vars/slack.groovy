@@ -7,6 +7,7 @@ def getGitUser(){
    def b = new StringBuffer()
    proc.consumeProcessErrorStream(b)
    println proc.text
+   println b.toString()
    return b.toString()
 }
 
