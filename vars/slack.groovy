@@ -7,13 +7,17 @@ def getUser(String User){
     println job
     def build =  job.getBuildByNumber(env.BUILD_NUMBER as int)
     println build
-    def userId = build.getCause().getUserId()
-    if(userID) {
-        println "User id to notify to: " + userId
-        return userId 
-    }else{
-      println 'cant find User who triggered job'  
-      return User
+    try {
+        def userId = build.getCause().getUserId()
+        if(userID) {
+            println "User id to notify to: " + userId
+            return userId 
+        }else{
+          println 'cant find User who triggered job'  
+          return User
+        }
+    }catch(Exception ex){
+       println 'something went wrong'
     }
 }
 
