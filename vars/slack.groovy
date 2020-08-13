@@ -7,16 +7,14 @@ def getUser(String User){
     println job
     def build =  job.getBuildByNumber(env.BUILD_NUMBER as int)
     println build
-    try {
-        println 'you are in try block'
-        def userId = build.getCause().getUserId()
-        println 'user id is --> '+ userId
-        return userId 
-    }catch(Exception ex){
-          println 'you are in catch block'
-          println 'cant find User who triggered job'  
-          return User
+    try{
+        def userId = build.getCause(Cause.UserIdCause).getUserId()
+        println "User id to notify to: " + userId
+        return userId
+    }catch(Exception ex) {
+        return "github-iniciated"
     }
+
 }
 
 def call(String User) {
