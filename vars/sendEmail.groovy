@@ -1,15 +1,20 @@
 #!/usr/bin/env groovy
 
 @NonCPS
-def getEMail() {
+def getEMail(String gitUserEmail) {
   def user = currentBuild.rawBuild.causes[0].userId 
-  return user
+  if(user){
+    return user
+  }else{
+    return gitUserEmail
+  }
+  
 }
 
-def call(String buildUrl, String branch) {
+def call(String gitUserEmail) {
  def status, logRegex
  
- def emailID = getEMail()
+ def emailID = getEMail(gitUserEmail)
     switch (currentBuild.currentResult) {
         case 'SUCCESS':
             status = 'successed'
@@ -33,7 +38,7 @@ def call(String buildUrl, String branch) {
 
     }
     emailext(subject: "Build $status - ${JOB_NAME} #${BUILD_NUMBER} ",
-            body: """ Job: ${env.JOB_NAME}\n Branch: ${branch}\n Build Number: ${BUILD_NUMBER}\n Build Url: ${buildUrl}\n Status: ${currentBuild.currentResult}"""
+            body: """ Job: ${env.JOB_NAME}\n Branch: ${env.BRANCH_NAME}\n Build Number: ${BUILD_NUMBER}\n Build Url: ${BUILD_URL}\n Status: ${currentBuild.currentResult}"""
             , from: '"Jenkins server" <foo@acme.org>'
              , to: "${emailID}")
 
