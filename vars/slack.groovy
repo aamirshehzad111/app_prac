@@ -28,7 +28,7 @@ def getUser(){
 def call() {
   println "Getting user information"
   def buildResult = currentBuild.currentResult
-  def currentUser = getGitUser()
+  def currentUser = getUser()
   println "User id found"
   def duration = currentBuild.durationString.replace(' and counting', '')
   def BUILD_URL="${BUILD_URL}console"
