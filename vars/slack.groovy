@@ -10,10 +10,8 @@ def getUser(String User){
     try {
         println 'you are in try block'
         def userId = build.getCause().getUserId()
-        if(userID) {
-            println "User id to notify to: " + userId
-            return userId 
-        }
+        println 'user id is --> '+ userId
+        return userId 
     }catch(Exception ex){
           println 'you are in catch block'
           println 'cant find User who triggered job'  
