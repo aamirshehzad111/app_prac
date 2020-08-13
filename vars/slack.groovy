@@ -6,8 +6,8 @@ def getGitUser(){
    def proc = "git log -1 --pretty=format:'%an".execute()
    def b = new StringBuffer()
    proc.consumeProcessErrorStream(b)
-   println proc.text
-   println b.toString()
+   println "git" + proc.text
+   println "git user" + b.toString()
    return b.toString()
 }
 
