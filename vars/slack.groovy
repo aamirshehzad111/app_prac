@@ -11,7 +11,7 @@ def getGitUser(){
    return b.toString()
 }
 
-def getUser(){
+def getUser(String User){
     def job = Jenkins.instance.getItemByFullName(env.JOB_NAME, Job.class)
     println job
     def build =  job.getBuildByNumber(env.BUILD_NUMBER as int)
@@ -21,14 +21,14 @@ def getUser(){
         println "User id to notify to: " + userId
         return userId
     }catch(Exception ex) {
-        return "github-iniciated"
+        return User
     }
 }
 
-def call() {
+def call(String User) {
   println "Getting user information"
   def buildResult = currentBuild.currentResult
-  def currentUser = getUser()
+  def currentUser = getUser(User)
   println "User id found"
   def duration = currentBuild.durationString.replace(' and counting', '')
   def BUILD_URL="${BUILD_URL}console"
