@@ -14,10 +14,12 @@ pipeline {
             }
         }
     }
-    // post {
-    //     always {
-    //         // script {
-    //         //     // sh "echo ${env.gitUser}"
-    //         // }
-    // }
-}
+     post {
+         always {
+             //script {
+               //   sh "echo ${env.gitUser}"
+             //}
+             slack("${env.gitUser}")
+         }   
+     }
+ }
