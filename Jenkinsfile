@@ -3,37 +3,21 @@ pipeline {
     environment {
         //This variable need be tested as string
         doError = '1'
+        gitUser = sh(script: "git log -1 --pretty=format:'%an'", , returnStdout: true).trim()
     }
-   
     agent any
-    
     stages {
         stage('Error') {
-            when {
-                expression { doError == '1' }
-            }
             steps {
-                echo "Failure"
-                error "failure test. It's work"
+                echo "${env.BUILD_NUMBER}"
+                echo "${env.gitUser}"
             }
         }
-        
-        stage('Success') {
-            when {
-                expression { doError == '0' }
-            }
-            steps {
-                echo "ok"
-            }
-        }
-
-        
-
     }
-    post {
-        always {
-            echo 'I will always say Hello again'
-        slack()
-        } 
-}
+    // post {
+    //     always {
+    //         // script {
+    //         //     // sh "echo ${env.gitUser}"
+    //         // }
+    // }
 }
