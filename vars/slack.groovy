@@ -8,16 +8,16 @@ def getUser(String User){
     def build =  job.getBuildByNumber(env.BUILD_NUMBER as int)
     println build
     try {
+        println 'you are in try block'
         def userId = build.getCause().getUserId()
         if(userID) {
             println "User id to notify to: " + userId
             return userId 
-        }else{
-          println 'cant find User who triggered job'  
-          return User
         }
     }catch(Exception ex){
-       println 'something went wrong'
+          println 'you are in catch block'
+          println 'cant find User who triggered job'  
+          return User
     }
 }
 
