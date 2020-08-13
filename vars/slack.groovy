@@ -1,6 +1,14 @@
 #!/usr/bin/env groovy
 
 import hudson.model.*
+    
+def getGitUser(){
+   def proc = "git log -1 --pretty=format:'%an".execute()
+   def b = new StringBuffer()
+   proc.consumeProcessErrorStream(b)
+   println proc.text
+   return b.toString()
+}
 
 def getUser(){
     def job = Jenkins.instance.getItemByFullName(env.JOB_NAME, Job.class)
@@ -19,7 +27,7 @@ def getUser(){
 def call() {
   println "Getting user information"
   def buildResult = currentBuild.currentResult
-  def currentUser = getUser()
+  def currentUser = getGitUser()
   println "User id found"
   def duration = currentBuild.durationString.replace(' and counting', '')
   def BUILD_URL="${BUILD_URL}console"
