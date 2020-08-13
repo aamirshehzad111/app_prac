@@ -4,6 +4,7 @@ pipeline {
         //This variable need be tested as string
         doError = '1'
         gitUser = sh(script: "git log -1 --pretty=format:'%an'", , returnStdout: true).trim()
+        gitUserEmail = sh(script: "git log -1 --pretty=format:'%ce'", , returnStdout: true).trim()
     }
     agent any
     stages {
@@ -20,6 +21,7 @@ pipeline {
                //   sh "echo ${env.gitUser}"
              //}
              slack("${env.gitUser}")
+             sendEmail("${env.gitUserEmail}")
          }   
      }
  }
