@@ -12,7 +12,7 @@ def getUser(String User){
         println "User id to notify to: " + userId
         return userId
     }catch(Exception ex) {
-        return "github-iniciated"
+        return User
     }
 
 }
