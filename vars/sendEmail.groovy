@@ -2,13 +2,13 @@
 
 @NonCPS
 def getEMail(String gitUserEmail) {
-  def user = currentBuild.rawBuild.causes[0].userId 
-  if(user){
-    return user
-  }else{
-    return gitUserEmail
-  }
-  
+    try{
+        def user = currentBuild.rawBuild.causes[0].userId 
+        println "User email to notify to: " + user
+        return user
+    }catch(Exception ex) {
+        return gitUserEmail
+    }
 }
 
 def call(String gitUserEmail) {
