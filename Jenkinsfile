@@ -1,5 +1,5 @@
 @Library('app_prac') _  
-pipeline {
+pipeline { 
     environment {
         //This variable need be tested as string
         doError = '1'
