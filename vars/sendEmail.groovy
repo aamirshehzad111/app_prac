@@ -7,6 +7,7 @@ def getEMail(String gitUserEmail) {
         println "User email to notify to: " + user
         return user
     }catch(Exception ex) {
+        println 'git user email is : ' + gitUserEmail
         return gitUserEmail
     }
 }
