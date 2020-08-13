@@ -2,26 +2,18 @@
 
 import hudson.model.*
     
-def getGitUser(){
-   def proc = "git log -1 --pretty=format:'%an".execute()
-   def b = new StringBuffer()
-   proc.consumeProcessErrorStream(b)
-   println "git" + proc.text
-   println "git user" + b.toString()
-   return b.toString()
-}
-
 def getUser(String User){
     def job = Jenkins.instance.getItemByFullName(env.JOB_NAME, Job.class)
     println job
     def build =  job.getBuildByNumber(env.BUILD_NUMBER as int)
     println build
-    try{
-        def userId = build.getCause().getUserId()
+    def userId = build.getCause().getUserId()
+    if(userID) {
         println "User id to notify to: " + userId
-        return userId
-    }catch(Exception ex) {
-        return User
+        return userId 
+    }else{
+      println 'cant find User who triggered job'  
+      return User
     }
 }
 
